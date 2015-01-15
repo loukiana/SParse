@@ -6,10 +6,17 @@
     "start": "node parser.js"
   },
   "dependencies": {
-    "express": "3.4.8",
-    "jade": "*",
     "node-regexp": "*",
-    "mysql" : "2.0.1"
+    "mysql" : "2.0.1",
+    "angular-bootstrap" : "*",
+      "jquery" : "*",
+      "bootstrap" : "*"
   },
-  "main": "public/html/index.html"
+  "main": "public/html/index.html",
+  "window": {
+    "show": false,
+    "position": "center",
+    "width": 500,
+    "height": 500
+  }
 }
