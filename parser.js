@@ -12,8 +12,8 @@ if (!process.argv[2] /*|| !fs.exists(process.argv[2])*/
     process.exit(1);
 }
 
-console.log('hello');
-console.log('Reading '+process.argv[2]+'...');
+console.log('Hello!');
+console.log('I am starting to process file '+process.argv[2]+'.');
 
 var instream = fs.createReadStream(process.argv[2]);
 
@@ -21,7 +21,6 @@ var lineAssemble = readline.createInterface({
     input: instream,
     output: process.stdout,
     terminal: false
-
 });
 
 var regexp = require('node-regexp');
@@ -47,11 +46,15 @@ function shouldSkipLine(line) {
 
 function scrambleLine(line) {
     if (logConfig.line.scramble) {
-        var reScramble = new RegExp(logConfig.line.scramble, 'm');
+        for (var scr in logConfig.line.scramble) {
+            if (scr) {
+                var reScramble = new RegExp(scr, 'm');
 
-        var toReplace = line.match(reScramble);
-        if (toReplace && toReplace.length > 1) {
-            return line.replace(toReplace[1], 'XXX');
+                var toReplace = line.match(reScramble);
+                if (toReplace && toReplace.length > 1) {
+                    return line.replace(toReplace[1], 'XXX');
+                }
+            }
         }
     }
     return line;
@@ -82,7 +85,7 @@ lineAssemble.on('close', function() {
             parseLine(assembledLine+"\r\n");
         }
         assembledLine = false;
-        console.log('ALL PARSED');
+        console.log('Processing ended.');
     }
 });
 

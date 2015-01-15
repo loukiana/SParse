@@ -1,6 +1,6 @@
 {
   "name": "SParse",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node parser.js"
@@ -10,5 +10,6 @@
     "jade": "*",
     "node-regexp": "*",
     "mysql" : "2.0.1"
-  }
+  },
+  "main": "public/html/index.html"
 }

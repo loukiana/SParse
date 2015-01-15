@@ -39,11 +39,12 @@ To be described... see examples in `config` folder.
 ```json
 {
     "line": {
-        "start" :    "(RO\\d+),(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}),",
-        "matcher" :  "(RO\\d+),(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\.\\d{3}),(\\d+),(\\D+),(\\d+),(In|Out),(\\d+),(\\d+),([\\s\\S]*)$",
+        "start" :    "(RO\\d+),(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\.(\\d{3}),",
+        "matcher" :  "(RO\\d+),(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\.(\\d{3}),(\\d+),(\\D+),(\\d+),(In|Out),(\\d+),(\\d+),([\\s\\S]*)$",
         "elements" : [
             "node",
             "tstamp",
+            "tstamp_ms",
             "someID" ,
             "object",
             "object_id",

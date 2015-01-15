@@ -1,1 +1,1 @@
-node --max-old-space-size=4000 parser.js tests\4095\23_ro1_22017 23_ro1_22017
+node --max-old-space-size=4000 parser.js tests\4095\22_ro1_20017_part 22_ro1_20017_all
