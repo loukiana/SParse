@@ -1,22 +1,23 @@
 {
-  "name": "SParse",
+  "name": "S-Parse",
   "version": "0.0.2",
   "private": true,
-  "scripts": {
-    "start": "node parser.js"
-  },
+    "nodejs":true,
   "dependencies": {
     "node-regexp": "*",
     "mysql" : "2.0.1",
-    "angular-bootstrap" : "*",
+    "angular" : "*",
+    "angular-filesystem":"*",
       "jquery" : "*",
       "bootstrap" : "*"
   },
   "main": "public/html/index.html",
   "window": {
-    "show": false,
+    "show": true,
     "position": "center",
-    "width": 500,
-    "height": 500
+    "width": 800,
+    "height": 500,
+      "toolbar": true,
+    "title" : "S-Parse log investigator assistant"
   }
 }
