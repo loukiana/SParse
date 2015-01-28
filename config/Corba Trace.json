@@ -1,0 +1,69 @@
+{
+    "line": {
+        "start" :    "(RO\\d+),(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\.(\\d{3}),",
+        "matcher" :  "(RO\\d+),(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2})\\.(\\d{3}),(\\d+),(\\D+),(\\d+),(In|Out),(\\d+),(\\d+),([\\s\\S]*)$",
+        "elements" : [
+            "node",
+            "tstamp",
+            "tstamp_ms",
+            "someID" ,
+            "object",
+            "object_id",
+            "direction",
+            "request_id",
+            "message_len",
+            "message"
+        ],
+
+        "include" :   ",TSwBooking,",
+
+        "scramble": [
+            "<SessionGUID>([-\\S]{5,50})</SessionGUID>",
+            "<ResShellRef>([-\\d]{1,20})</ResShellRef>"
+        ]
+    },
+
+    "message": {
+        "in_matcher" : "(\\S*)\\(([\\s\\S]*)\\)$",
+        "in_elements": ["req", "params"],
+        "out_matcher": "(\\S*) [^\\=]*\\=?([\\s\\S]*)$",
+        "out_elements": ["req", "result"]
+    },
+
+    "createTable" : [
+        "node varchar(5)",
+        "tstamp datetime",
+        "tstamp_ms int",
+        "someID bigint",
+        "object varchar(25)",
+        "object_id bigint",
+        "direction varchar(3)",
+        "request_id bigint",
+        "message_len bigint",
+        "message longtext",
+        "req varchar(30)",
+        "params longtext",
+        "result longtext" ],
+
+    "createIOTable" : [
+    "CREATE TABLE trace01_io ",
+    " select ",
+    "tin.node, ",
+    "tin.tstamp as req_tstamp, ",
+    "tin.tstamp_ms as req_tstamp_ms, ",
+    "tout.tstamp as resp_tstamp, ",
+    "tout.tstamp_ms as resp_tstamp_ms, ",
+    "1000*(UNIX_TIMESTAMP(TIMESTAMP(tout.tstamp)) - UNIX_TIMESTAMP(TIMESTAMP(tin.tstamp))) + (tout.tstamp_ms - tin.tstamp_ms) as duration, ",
+    "tin.someID, ",
+    "tin.object, ",
+    "tin.object_id, ",
+    "tin.request_id, ",
+    "tin.message_len, ",
+    "tin.message, ",
+    "tin.req, ",
+    "tout.result ",
+    "from ",
+    "$SOURCETABLE$ tin join ",
+    "$SOURCETABLE$ tout on tin.request_id = tout.request_id and tin.direction='In' and tout.direction<>'In' and  tin.req = tout.req "
+        ]
+}

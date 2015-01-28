@@ -36,6 +36,7 @@ To be described... see examples in `config` folder.
 ```
 
 * Format of the file to be parsed is configured in other file:
+
 ```json
 {
     "line": {
@@ -71,8 +72,20 @@ To be described... see examples in `config` folder.
 Example commands
 ----------------
 
-Parse file (config json must correspond to it's format) and load into table in MySQL (table must exist, config `db.json` must point to correct database):
+Parse file (config json must correspond to it's format) and load into table in MySQL (table must NOT exist, config `db.json` must point to schema name or parameter has to be set):
+
+```
+  node --max-old-space-size=4000 parser.js <log file> <table name> [<schema name>] [<config file>] 
+```
+
+Example call that will create a new table and use (create if not exists) schema with name taken from `db.json`:
 
 ```
   node --max-old-space-size=4000 parser.js tests\4095\22_ro1_22017.log 22_ro1_22017
+```
+
+Example call that will create new table `tbl` and use (create if not exists) schema `sch`. It will use format configuration `corba trace.json`:
+
+```
+  node --max-old-space-size=4000 parser.js tests\4095\22_ro1_22017.log tbl sch ".\config\corba trace.json" 
 ```

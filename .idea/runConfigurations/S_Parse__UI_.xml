@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="S-Parse (UI)" type="NodeWebKit" factoryName="Node-webkit" exePath="R:/DevKit/node-webkit-v0.11.5-win-x64/nw.exe" inputPath="$PROJECT_DIR$" programParameters="--remote-debugging-port=3222" workingDirectory="$PROJECT_DIR$">
+  <configuration default="false" name="S-Parse (UI)" type="NodeWebKit" factoryName="Node-webkit" exePath="R:/DevKit/node-webkit-v0.11.5-win-x64/nw.exe" inputPath="$PROJECT_DIR$" workingDirectory="$PROJECT_DIR$">
     <option name="name" value="S-Parse (UI)" />
     <RunnerSettings RunnerId="debuggableProgram" />
     <ConfigurationWrapper RunnerId="debuggableProgram" />

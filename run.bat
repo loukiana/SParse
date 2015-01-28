@@ -1,1 +1,5 @@
-node --max-old-space-size=4000 parser.js tests\4095\22_ro1_20017_part 22_ro1_20017_all
+rem parser 
+node --max-old-space-size=4000 parser.js 
+
+rem ui
+rem nw --remote-debugging-port=9222 .\

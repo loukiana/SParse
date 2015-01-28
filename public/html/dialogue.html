@@ -1,0 +1,21 @@
+<!-- Begin page content -->
+    <div class="page-header"  >
+        <h1>How to use me</h1>
+    </div>
+    <p class="lead">Hello. I am a log investigation assistant. If you have some log files to look into please follow the steps below.</p>
+
+    <form name="logFileForm" novalidate ng-submit="logFileForm.$valid && dlg.loadLogFiles() && (dlg.step=3)">
+        <div class="step" id="step_1" ng-show="dlg.step > 0">
+            <p>Please enter identifier of this investigation.</p>
+            <input type="text" ng-model="dlg.dbName"  required ng-change="dlg.step=(dlg.dbName) ? 2 : 1" />
+        </div>
+
+        <div class="step" id="step_2" ng-show="dlg.step > 1">
+            <p>Please select file(s) or folder with logs you wish to investigate.</p>
+            <input type="file" ng-model="dlg.logFilesSourcePath"  required />
+            <input type="submit" value="Load"/>
+        </div>
+    </form>
+
+    <div class="step" id="step_3" ng-show="dlg.step > 2">
+    </div>

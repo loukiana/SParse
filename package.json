@@ -7,7 +7,9 @@
     "node-regexp": "*",
     "mysql" : "2.0.1",
     "angular" : "*",
-    "angular-filesystem":"*",
+    "jszip":"*",
+    "line-by-line":"*",
+    "event-stream":"*",
       "jquery" : "*",
       "bootstrap" : "*"
   },

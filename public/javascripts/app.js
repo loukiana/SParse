@@ -1,12 +1,13 @@
 (function(){
 
-    var app = angular.module('sparse', ['fileSystem']);
+    var app = angular.module('sparse', []);
     var fs = require("fs");
+    var JSZip = require("jszip");
     var appCfg= {
         CONFIG_DIR: "./config"
     };
 
-    app.controller('NavCtrl', function($scope, $window, fileSystem) {
+    app.controller('NavCtrl', function($scope, $window) {
         $scope.terminal = [];
         $scope.log = [];
 
@@ -19,9 +20,10 @@
             newVar.showDevTools();
 */
             $scope.tabs = [
-                {"name": "About"},
+                {"name": "Main"},
                 {"name": "Config"},
-                {"name": "Log"}
+                {"name": "Log"},
+                {"name": "New Format"}
             ];
 
             $scope.formats= {};
@@ -32,12 +34,17 @@
                         console.error(err);
                         $scope.log.push('ERROR! '+err.text);
                     } else {
-                        if (files[i] == "db.json") continue;
-                        $scope.log.push('Config Found: ' + files[i]);
-                        var name = files[i].replace(/\.[^/.]+$/, "");
-                        $scope.formats[name]= JSON.parse(fs.readFileSync(appCfg.CONFIG_DIR+'/'+files[i], 'utf8'));
-                        $scope.log.push('Config Loaded: ' + name);
-                        $scope.tabs.push({"name": name});
+                        try {
+                            if (files[i] == "db.json") continue;
+                            $scope.log.push('Config Found: ' + files[i]);
+                            var name = files[i].replace(/\.[^/.]+$/, "");
+                            $scope.formats[name] = JSON.parse(fs.readFileSync(appCfg.CONFIG_DIR + '/' + files[i], 'utf8'));
+                            $scope.log.push('Config Loaded: ' + name);
+                            $scope.tabs.push({"name": name});
+                        } catch (err2) {
+                            console.error(err);
+                            $scope.log.push('ERROR! '+err.text);
+                        }
                     }
                 }
             });
@@ -47,34 +54,32 @@
 
     });
 
-    app.controller('ConfigCtrl', function($scope, $window, fileSystem) {
+    app.controller('FormatCtrl', function($scope, $window) {
+        this.name="To be implemented...";
+    });
 
+    app.controller('DialogueCtrl', function($scope, $window) {
 
-        $scope.getFiles = function(dir) {
-            $.when(fs.readdirSync(dir)).then(function(files) {
-                for(var i in files) {
-                    $scope.terminal.push('Config Found: ' + files[i]);
-                    //var cfg = require(dir+'/'+files[i]);
-                    //$scope.log.push('Config Loaded: ' + files[i]);
-                }
-            }, function(err) {
-                console.error(err);
-                $scope.log.push('ERROR! '+err.text);
-                $window.alert(err.text);
+        this.step=1;
+        this.logFilesSourcePath = false; // xxx load from history
+        this.dbName = "";
+
+        this.loadLogFiles = function() {
+            if (!fs.existsSync(logFilesSourcePath)) {
+                alert("No such file or folder"); //todo balloon
+            }
+            // xxx if zip - unzip in temp folder and (*)
+            // if folder - for each file in folder
+            // (*) delete created work\temp files
+
+            var zip = new JSZip();
+            fs.readFile(logFilesSourcePath, function(err, data) {
+                if (err) alert(err.text);
+
+                var zip = new JSZip(data);
+                zip.files
             });
-
-            /*$scope.log.push('Getting directory content '+dir);
-            fileSystem.getFolderContents(dir).then(function(entries) {
-                $scope.terminal.push('Getting folder content');
-                $scope.log.push('Getting folder content');
-                for(var i = 0; i<entries.length; i++) {
-                    $scope.terminal.push(entries[i].fullPath);
-                }
-            }, function(err) {
-                //console.log(err);
-                $scope.log.push('ERROR! '+err.text);
-                $window.alert(err.text);
-            });*/
+            return true;
         };
 
         $scope.loadConfig = function (file) {

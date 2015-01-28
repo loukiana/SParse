@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="parser.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="parser.js" application-parameters="R:\RTC\etc\SParse\tests\input\SwAPITrace.log trace02" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="parser.js" type="NodeJSConfigurationType" factoryName="Node.js" path-to-node="C:/Program Files/nodejs/node" path-to-js-file="parser.js" application-parameters="R:\RTC\etc\SParse\tests\input\SwAPITrace.log  trace02 dbnamehere" working-dir="$PROJECT_DIR$">
     <RunnerSettings RunnerId="NodeJS.debug" />
     <RunnerSettings RunnerId="NodeJS.run" />
     <ConfigurationWrapper RunnerId="NodeJS.debug" />

@@ -56,6 +56,11 @@
         -------------------------------------------------- */
         /* Not required for template or sticky footer method. */
 
+        #wrap > .step {
+            padding-top: 60px;
+            border: 1px;
+        }
+
         #wrap > .container {
             padding-top: 60px;
         }
@@ -91,13 +96,12 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="{active : nav.tab===idx}" ng-repeat="idx in [0,1,2]"><a href="#" ng-click="nav.tab=idx">{{tabs[idx].name}}</a></li>
                     <li class="dropdown right">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Format<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Formats<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" ng-show="tabs.length &gt; 2">
-                            <li ng-class="{active : nav.tab===$index}" ng-repeat="tab in tabs" ng-show="$index &gt; 2"><a href="#" ng-click="nav.tab=$index">{{tab.name}}</a></li>
-                            <!--<li class="divider"></li>-->
-                            <!--<li class="dropdown-header">Nav header</li>-->
-                            <!--<li><a href="#">Separated link</a></li>-->
-                            <!--<li><a href="#">One more separated link</a></li>-->
+                            <li> <a href="#" ng-click="nav.tab=3">Configure new format</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Edit format:</li>
+                            <li ng-class="{active : nav.tab===$index}" ng-repeat="t in tabs" ng-show="$index &gt; 3"><a href="#" ng-click="nav.tab=$index">{{t.name}}</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -105,19 +109,14 @@
         </div>
     </nav>
 
-    <!-- Begin page content -->
-    <div class="container" id="tab_about" ng-show="nav.tab==0">
-        <div class="page-header">
-            <h1>How to use me</h1>
-        </div>
-        <p class="lead">Hello. I am a log investigation assistant. If you have some log files to look into please follow the steps below.</p>
-
-        <p>More details can be found <a href="https://github.com/loukiana/SParse">here</a>. You can also contact my creator Sasha L. with your questions.</p>
+    <div class="container" id="tab_dialogue" ng-show="nav.tab == 0" ng-include="'dialogue.html'" ng-controller="DialogueCtrl as dlg">
     </div>
 
     <div class="container" id="tab_config" ng-show="nav.tab==1">
         <div class="page-header">
             <h1>Config</h1>
+            <p>Here we will have general configuration of the app... folder for format files, db connection, etc.</p>
+            <p>TODO</p>
         </div>
 
     </div>
@@ -125,12 +124,11 @@
     <div class="container" id="tab_log" ng-show="nav.tab==2">
         <div class="page-header">
             <h1>Log</h1>
-            <div ng-repeat="message in log track by $index">{{message}}</div>
+            <div class="small" ng-repeat="message in log track by $index">{{message}}</div>
         </div>
 
     </div>
-
-    <div class="container" id="tab_format" ng-show="nav.tab &gt; 2" ng-include="public/html/formatPage.html">
+    <div class="container" id="tab_format" ng-show="nav.tab &gt; 2" ng-include="'formatPage.html'">
 
     </div>
 
@@ -153,7 +151,7 @@
 <!--<script src="../assets/js/bootstrap-modal.js"></script>-->
 <!--<script src="../assets/js/bootstrap-dropdown.js"></script>-->
 <!--<script src="../assets/js/bootstrap-scrollspy.js"></script>-->
-<!--<script src="../assets/js/bootstrap-tab.js"></script>-->
+<!--<script src="../assets/js/bootstrap-nav.52tab.js"></script>-->
 <!--<script src="../assets/js/bootstrap-tooltip.js"></script>-->
 <!--<script src="../assets/js/bootstrap-popover.js"></script>-->
 <!--<script src="../assets/js/bootstrap-button.js"></script>-->
