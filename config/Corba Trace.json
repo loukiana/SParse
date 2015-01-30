@@ -17,14 +17,14 @@
 
         "include" :   ",TSwBooking,",
 
-        "scramble": [
+        "scramble_REMOVE_THIS_POSTFIX_TO_USE": [
             "<SessionGUID>([-\\S]{5,50})</SessionGUID>",
             "<ResShellRef>([-\\d]{1,20})</ResShellRef>"
         ]
     },
 
     "message": {
-        "in_matcher" : "(\\S*)\\(([\\s\\S]*)\\)$",
+        "in_matcher" : "(\\S*)\\(([\\s\\S]*)\\);?( Name=\"[\\s\\S]*\", Executing=\\d+, UseCount=\\d+)?$",
         "in_elements": ["req", "params"],
         "out_matcher": "(\\S*) [^\\=]*\\=?([\\s\\S]*)$",
         "out_elements": ["req", "result"]

@@ -108,7 +108,7 @@ function shouldSkipLine(line) {
 
 
 function scrambleLine(line) {
-    if (logConfig.line.scramble) {
+    if (logConfig.line.scramble && logConfig.line.scramble.length) {
         for (var scr in logConfig.line.scramble) {
             if (scr) {
                 var reScramble = new RegExp(scr, 'm');
